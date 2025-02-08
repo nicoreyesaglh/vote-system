@@ -14,7 +14,10 @@ CREATE TABLE IF NOT EXISTS voter (
     lastName VARCHAR(255) NOT NULL,
     document VARCHAR(255) UNIQUE NOT NULL,
     dob DATE NOT NULL,
-    is_candidate TINYINT NOT NULL DEFAULT 0
+    is_candidate TINYINT NOT NULL DEFAULT 0,
+    address VARCHAR(255) NULL,
+    phone VARCHAR(20) NULL,
+    gender ENUM('M', 'F', 'O') NULL
 );
 
 CREATE TABLE IF NOT EXISTS vote (

@@ -44,6 +44,44 @@ const login = async (req, res) => {
     }
 };
 
+const modifyPassword = async (req, res) => {
+    try {
+        const { email, oldPassword, newPassword } = req.body;
+
+        if (!oldPassword || !newPassword) {
+            return res.status(400).json({ error: "Falta contraseña actual o nueva." });
+        }
+
+        // obtener admin con contraseña actual 
+        const [[admin]] = await pool.query('SELECT * FROM admin WHERE email = ?', [email]);
+
+        if (!admin) {
+            return res.status(404).json({ error: "Admin no encontrado." });
+        }
+
+        // comparar la contraseña actual
+        const isPasswordValid = await bcrypt.compare(oldPassword, admin.password);
+
+        // si contraseña actual es incorrecta
+        if (!isPasswordValid) {
+            return res.status(401).json({ error: "La contraseña actual es incorrecta." });
+        }
+
+        // si es valida encriptar la nueva contraseña
+        const hashedNewPassword = await bcrypt.hash(newPassword, 10);
+
+        //actualizzar la contraseña
+        await pool.query('UPDATE admin SET password = ? WHERE email = ?', [hashedNewPassword, email]);
+
+        res.json({ message: "Contraseña cambiada correctamente." });
+
+    } catch (error) {
+        console.error("Error en changePassword:", error);
+        res.status(500).json({ error: "Error interno del servidor." });
+    }
+};
+
 module.exports = {
     login,
+    modifyPassword
 };

@@ -1,0 +1,25 @@
+CREATE TABLE ADMIN (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    lastName VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE VOTER (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    lastName VARCHAR(255) NOT NULL,
+    document VARCHAR(255) NOT NULL,
+    dob DATE NOT NULL,
+    is_candidate TINYINT NOT NULL
+);
+
+CREATE TABLE VOTE (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    voter_id INT NOT NULL,
+    candidate_voted_id INT NOT NULL,
+    date DATE NOT NULL,
+    FOREIGN KEY (voter_id) REFERENCES VOTER(id),
+    FOREIGN KEY (candidate_voted_id) REFERENCES VOTER(id)
+);

@@ -1,6 +1,7 @@
 const express = require('express');
 const config = require('./config');
 const router = require('./api');
+require('dotenv').config();
 
 const app = express();
 

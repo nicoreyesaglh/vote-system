@@ -1,18 +1,18 @@
 const router = require("express").Router();
-const appController = require("../controllers");
+const voteController = require("../controllers/voteController");
+const authController = require("../controllers/authController");
 
 router.get("/health", (req, res) => {
     res.send("Hello World!");
 });
 
 router.post('/login', (req, res) =>  {});
-router.post('/register', (req, res) => { });
-router.get('/candidates', (req, res) => { });
-router.post('/vote', appController.newVote);
-router.get('/votes', (req, res) => { });
+router.post('/vote', voteController.newVote);
+router.post('/createVoter', voteController.newVote);
+router.get('/getVotes', (req, res) => { });
+router.get('/getCandidates', (req, res) => { });
 router.get('/logout', (req, res) => { });
-router.put('/updateVote', (req, res) => { });
-router.get('/voterData', (req, res) => { });
+router.get('/getVoterData', (req, res) => { });
 
 module.exports = router;
     

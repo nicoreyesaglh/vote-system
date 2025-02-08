@@ -1,14 +1,17 @@
-const mysql = require('mysql2');
+const fs = require('fs');
+const mysql = require('mysql2/promise');
+require('dotenv').config();
 
 const pool = mysql.createPool({
-    host: 'localhost',  
-    user: 'nico_user',
-    password: 'notti0419',
-    database: 'vote_system_local',
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASS,
+    database: 'vote_system',
     waitForConnections: true,
+    multipleStatements: true,
     connectionLimit: 10,
     queueLimit: 0
-  });
+});
+  
 
-
-module.exports = pool.promise();
+module.exports = pool;

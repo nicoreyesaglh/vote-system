@@ -3,6 +3,7 @@ const path = require('path');
 const mysql = require('mysql2/promise');
 const pool = require('./index.js');
 require('dotenv').config();
+const bcrypt = require('bcrypt');
 
 async function setupDatabase() {
     const sqlFilePath = path.join(__dirname, 'database.sql');
@@ -18,6 +19,26 @@ async function setupDatabase() {
     //crear BBDD
     await connection.query(`CREATE DATABASE IF NOT EXISTS vote_system;`);
     console.log(`✅ Base de datos creada o ya existente.`);
+    await connection.query(`USE vote_system;`);
+    await connection.query(`
+      CREATE TABLE IF NOT EXISTS admin (
+          id INT PRIMARY KEY AUTO_INCREMENT,
+          name VARCHAR(255) NOT NULL,
+          lastName VARCHAR(255) NOT NULL,
+          email VARCHAR(255) NOT NULL,
+          password VARCHAR(255) NOT NULL
+      );
+  `);
+  // Creación de admin con contraseña encriptada
+  const passwordHash = await bcrypt.hash('admin123', 10);
+
+  await connection.query(`
+      INSERT IGNORE INTO admin (name, lastName, email, password) 
+      VALUES ('admin', 'test', 'admin@test.com', ?);
+  `, [passwordHash]);
+      
+  console.log(`✅ Usuario Admin creado exitosamente.`);
+      
 
     await connection.end(); 
 

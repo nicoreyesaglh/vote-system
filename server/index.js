@@ -9,5 +9,7 @@ app.listen(config.PORT, () => {
     console.log('Server is running on http://localhost:' + config.PORT);
 });
 
-app.use(router);
+app.use(express.json());
+
+app.use(`/${config.api.root}/${config.api.url}/`, router);
     

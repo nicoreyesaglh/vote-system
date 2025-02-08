@@ -6,7 +6,7 @@ router.get("/health", (req, res) => {
     res.send("Hello World!");
 });
 
-router.post('/login', (req, res) =>  {});
+router.post('/login', authController.login);
 router.post('/vote', voteController.newVote);
 router.post('/createVoter', voteController.newVote);
 router.get('/getVotes', (req, res) => { });

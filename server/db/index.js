@@ -9,7 +9,7 @@ const pool = mysql.createPool({
     database: 'vote_system',
     waitForConnections: true,
     multipleStatements: true,
-    connectionLimit: 10,
+    connectionLimit: 30,
     queueLimit: 0
 });
   

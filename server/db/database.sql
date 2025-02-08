@@ -27,8 +27,6 @@ CREATE TABLE IF NOT EXISTS vote (
 );
 
 -- DATOS DE PRUEBA
-INSERT IGNORE INTO admin (name, lastName, email, password) VALUES
- ('admin', 'test', 'admin@test.com', 'admin123');
 
 INSERT IGNORE INTO voter (name, lastName, document, dob, is_candidate) VALUES 
 ('Juan', 'Perez', '12345678', '1990-01-01', 1),

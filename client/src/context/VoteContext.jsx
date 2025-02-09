@@ -42,8 +42,25 @@ export const VoteProvider = ({ children }) => {
     fetchTopCandidates();
   }, []);
 
+  //cargar votos
+  useEffect(() => {
+    fetchVotes();
+  }, []);
+
+  const fetchVotes = async (page = 1, limit = 10) => {
+    setLoading(true);
+    try {
+      const data = await voteAPI.getVotes(page, limit);
+      setVotes(data);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
-    <VoteContext.Provider value={{ candidates, votes, topCandidates, loading, error }}>
+    <VoteContext.Provider value={{ candidates, votes, fetchVotes, topCandidates, loading, error }}>
       {children}
     </VoteContext.Provider>
   );

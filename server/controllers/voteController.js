@@ -85,9 +85,33 @@ const getCandidates = async (req, res) => {
 
 const getVotes = async (req, res) => {
     try {
-        //consultar todos los votos
-        const [rows] = await pool.query('SELECT * FROM vote');
-        res.json(rows);
+        //opciones de paginado obtenidas del query
+        const { page = 1, limit = 10 } = req.query;
+        const offset = (page - 1) * limit;
+
+        //consultar los votos y obtener datos del votante y candidato
+        const [rows] = await pool.query(`
+            SELECT v.id, v.voter_id, v.candidate_voted_id, v.date,
+            CONCAT(voter.name, ' ', voter.lastName) AS voter,
+            CONCAT(candidate.name, ' ', candidate.lastName) AS candidate
+            FROM vote v
+            JOIN voter AS voter ON v.voter_id = voter.id
+            JOIN voter AS candidate ON v.candidate_voted_id = candidate.id
+            LIMIT ? OFFSET ?
+            `, [Number(limit), offset]);
+        
+        //calculo de paginas
+            const [countRows] = await pool.query('SELECT COUNT(*) AS total FROM vote');
+            const totalVotes = countRows[0].total;
+            const totalPages = Math.ceil(totalVotes / limit);
+    
+            res.json({
+                data: rows,
+                totalVotes,
+                totalPages,
+                currentPage: page,
+                votesPerPage: limit
+            });
     } catch (error) {
         console.error("Error en getVotes:", error);
         res.status(500).json({ error: "Error interno del servidor" });
@@ -96,36 +120,40 @@ const getVotes = async (req, res) => {
 
 const getVoteData = async (req, res) => {
     try {
-        const { voter_id, candidate_id } = req.body;
+        const { vote_id } = req.body;
 
-        // consultar los datos del votante
-        const [voterRows] = await pool.query('SELECT * FROM voter WHERE id = ?', [voter_id]);
-        if (voterRows.length === 0) {
-            return res.status(404).json({ error: "Votante no encontrado" });
+        const [rows] = await pool.query(`
+            SELECT 
+            v.id, 
+            v.voter_id, 
+            v.candidate_voted_id, 
+            v.date,
+            voter.*,  -- Trae todos los campos del votante
+            CONCAT(candidate.name, ' ', candidate.lastName) AS candidate
+            FROM vote v
+            JOIN voter AS voter ON v.voter_id = voter.id
+            JOIN voter AS candidate ON v.candidate_voted_id = candidate.id AND candidate.is_candidate = 1
+            WHERE v.id = ?
+        `, [vote_id]);
+
+        if (rows.length === 0) {
+            return res.status(404).json({ error: "Voto no encontrado" });
         }
-        const voter = voterRows[0];
 
-        // consultar los datos del candidato
-        const [candidateRows] = await pool.query('SELECT * FROM voter WHERE id = ? AND is_candidate = 1', [candidate_id]);
-        if (candidateRows.length === 0) {
-            return res.status(404).json({ error: "Candidato no encontrado o no es un candidato válido" });
+        res.json(rows[0]);
+
+        } catch (error) {
+            console.error("Error en getVoteData:", error);
+            res.status(500).json({ error: "Error interno del servidor" });
         }
-        const candidate = candidateRows[0];
-
-        // agrupar ambos resultados en la respuesta
-        res.json({ voter, candidate });
-
-    } catch (error) {
-        console.error("Error en getVoteData:", error);
-        res.status(500).json({ error: "Error interno del servidor" });
-    }
 };
 
 const getTopVotedCandidates = async (req, res) => {
     try {
         //Candidatos con sus votos, haciendo conteo de votos con join de las tablas voter y vote y ordenarlos de mayor a menor
         const [rows] = await pool.query(`
-            SELECT v.id, v.name, v.lastName, COUNT(vt.candidate_voted_id) AS total_votes
+            SELECT v.id, CONCAT(v.name, ' ', v.lastName) AS candidate,
+            COUNT(vt.candidate_voted_id) AS total_votes
             FROM voter v
             JOIN vote vt ON v.id = vt.candidate_voted_id
             WHERE v.is_candidate = 1

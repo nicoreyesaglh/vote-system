@@ -20,7 +20,7 @@ const Login = () => {
     try {
         const data = await authAPI.login(email, password);
         login(data.user, data.token);
-        navigate("/admin"); 
+        navigate("/"); 
     } catch (err) {
         setError("Email o contraseña incorrectos");
     }

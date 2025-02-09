@@ -38,7 +38,7 @@ const Login = () => {
             onChange={(e) => setEmail(e.target.value)}
             required
             slotProps={{
-              input: {style:{ color: 'whitesmoke', fontFamily:"Poppins !important" }}
+              input: {style:{ color: 'whitesmoke'}}
             }}
           />
           <InputLabel className='label'>Contraseña:</InputLabel>
@@ -50,7 +50,7 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
             required
             slotProps={{
-              input: {style:{ color: 'whitesmoke', fontFamily:"Poppins !important"  }}
+              input: {style:{ color: 'whitesmoke'}}
             }}/>
         <Button type="submit" className="button">Iniciar Sesión</Button>
       </form>

@@ -7,7 +7,10 @@ export const AuthProvider = ({ children }) => {
     //cargar usuario de localStorage si existe
     return JSON.parse(localStorage.getItem("user")) || null;
   });
-  const [token, setToken] = useState(null);
+  const [token, setToken] = useState(() => {
+  //cargar token de localStorage si existe
+  return localStorage.getItem("token") || null;
+});
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");

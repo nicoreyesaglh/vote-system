@@ -11,6 +11,8 @@ import "./vote.css";
 import CandidatesList from "./CandidatesList";
 import { VoteContext } from "../../context/VoteContext";
 import voteAPI from "../../api/voteAPI";
+import { useNavigate } from "react-router-dom";
+
 
 const Vote = () => {
   const { candidates } = useContext(VoteContext);
@@ -19,6 +21,7 @@ const Vote = () => {
   const [checked, setChecked] = useState(null);
   const [error, setError] = useState(null);
   const [confirm, setConfirm] = useState(null);
+  const navigate = useNavigate();
 
   const handleVote = async (e) => {
     setError(null);
@@ -86,6 +89,9 @@ const Vote = () => {
         )}
         <Button type="submit" className="button">
           Enviar Voto
+        </Button>
+        <Button onClick={() => navigate('/')} className="button">
+         Volver
         </Button>
       </form>
       {error && (

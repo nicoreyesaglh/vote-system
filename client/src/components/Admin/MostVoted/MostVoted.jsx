@@ -21,7 +21,7 @@ const MostVoted = () => {
         Candidatos
       </Typography>
       <List className="list">
-        {topCandidates.map((c) => {
+      {topCandidates?.length > 0 ? topCandidates.map((c) => {
           const labelId = `${c.id}`;
           return (
             <ListItem key={c.id + c.candidate} className="list-item" disablePadding>
@@ -37,7 +37,11 @@ const MostVoted = () => {
               </h2>
             </ListItem>
           );
-        })}
+        }) : 
+        <Typography variant="h6" className="subtitle-two">
+            No hay votos registrados
+        </Typography>
+        }
       </List>
     </Grid2>
   );

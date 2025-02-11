@@ -78,7 +78,7 @@ const Votes = () => {
           {getTopVotedCandidate(topCandidates)}
         </Typography>
       )}
-      {votes && votes.totalVotes && (
+       {votes && votes.totalVotes > 0 && (
         <Typography variant="h6" className="subtitle-two">{`${
           votes.totalVotes
         } ${
@@ -86,7 +86,7 @@ const Votes = () => {
         }`}</Typography>
       )}
       <List className="list">
-        {votes?.data?.map((v) => {
+      {votes?.data?.length > 0 ? votes.data.map((v) => {
           const labelId = `${v.id}`;
           const formattedDate = new Date(v.date).toLocaleDateString();
           return (
@@ -114,7 +114,11 @@ const Votes = () => {
               </Typography>
             </ListItem>
           );
-        })}
+        }) : 
+        <Typography variant="h6" className="subtitle-two">
+            No hay votos registrados
+            </Typography>
+        }
       </List>
       <div style={{ marginTop: "20px" }}>
         <Pagination

@@ -24,7 +24,7 @@ const MostVoted = () => {
         {topCandidates.map((c) => {
           const labelId = `${c.id}`;
           return (
-            <ListItem key={c.id + c.name} className="list-item" disablePadding>
+            <ListItem key={c.id + c.candidate} className="list-item" disablePadding>
               <ListItemText id={labelId} primary={c.candidate} />
               <h2
                 style={{

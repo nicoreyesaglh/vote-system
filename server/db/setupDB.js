@@ -1,20 +1,20 @@
-const fs = require('fs');
-const path = require('path');
-const mysql = require('mysql2/promise');
-const pool = require('./index.js');
-require('dotenv').config();
-const bcrypt = require('bcrypt');
+const fs = require("fs");
+const path = require("path");
+const mysql = require("mysql2/promise");
+const pool = require("./index.js");
+require("dotenv").config();
+const bcrypt = require("bcrypt");
 
 async function setupDatabase() {
-    const sqlFilePath = path.join(__dirname, 'database.sql');
-    const sqlQuery = fs.readFileSync(sqlFilePath, 'utf8');
-  
-    try {
+  const sqlFilePath = path.join(__dirname, "database.sql");
+  const sqlQuery = fs.readFileSync(sqlFilePath, "utf8");
+
+  try {
     // Conectar al servidor de MySQL
     const connection = await mysql.createConnection({
-        host: process.env.DB_HOST,
-        user: process.env.DB_USER,
-        password: process.env.DB_PASS,
+      host: process.env.DB_HOST,
+      user: process.env.DB_USER,
+      password: process.env.DB_PASS,
     });
     //crear BBDD
     await connection.query(`CREATE DATABASE IF NOT EXISTS vote_system;`);
@@ -29,28 +29,30 @@ async function setupDatabase() {
           password VARCHAR(255) NOT NULL
       );
   `);
-  // Creación de admin con contraseña encriptada
-  const passwordHash = await bcrypt.hash('admin123', 10);
+    // Creación de admin con contraseña encriptada
+    const passwordHash = await bcrypt.hash("admin123", 10);
 
-  await connection.query(`
+    await connection.query(
+      `
       INSERT IGNORE INTO admin (name, lastName, email, password) 
       VALUES ('admin', 'test', 'admin@test.com', ?);
-  `, [passwordHash]);
-      
-  console.log(`✅ Usuario Admin creado exitosamente.`);
-      
+  `,
+      [passwordHash]
+    );
 
-    await connection.end(); 
+    console.log(`✅ Usuario Admin creado exitosamente.`);
+
+    await connection.end();
 
     const connectionForSetup = await pool.getConnection();
     // Ejecutar el script SQL para precargar datos
     await connectionForSetup.query(sqlQuery);
-        
+
     connectionForSetup.release();
-        
-    console.log('✅ Base de datos inicializada correctamente.');
+
+    console.log("✅ Base de datos inicializada correctamente.");
   } catch (error) {
-    console.error('❌ Error ejecutando el script SQL:', error);
+    console.error("❌ Error ejecutando el script SQL:", error);
   } finally {
     await pool.end();
   }

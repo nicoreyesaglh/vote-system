@@ -96,3 +96,24 @@
   align-items: center;
   height: 20%;
 }
+
+@media screen and (max-width: 480px) {
+  .container{
+    width: 100%;
+    .form{
+      width:100%; 
+    }
+    .div-radios{
+      flex-direction: column ;
+    }
+    .iscandidate{
+      width: 100%;
+      text-align: center;
+    }
+   .label{
+    width: 100%;
+    text-align: center;
+   }
+  }
+  
+}

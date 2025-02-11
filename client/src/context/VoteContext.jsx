@@ -1,5 +1,5 @@
-import React, { createContext, useState, useEffect } from 'react';
-import voteAPI from '../api/voteAPI';
+import React, { createContext, useState, useEffect } from "react";
+import voteAPI from "../api/voteAPI";
 
 export const VoteContext = createContext();
 
@@ -60,7 +60,9 @@ export const VoteProvider = ({ children }) => {
   };
 
   return (
-    <VoteContext.Provider value={{ candidates, votes, fetchVotes, topCandidates, loading, error }}>
+    <VoteContext.Provider
+      value={{ candidates, votes, fetchVotes, topCandidates, loading, error }}
+    >
       {children}
     </VoteContext.Provider>
   );

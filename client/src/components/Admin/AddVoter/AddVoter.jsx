@@ -1,7 +1,21 @@
 import React, { useState, useContext } from "react";
 import voteAPI from "../../../api/voteAPI";
-import { Alert, Button, FormControl, FormControlLabel, FormLabel, Grid2, InputLabel, MenuItem, Radio, RadioGroup, Select, TextField, Typography } from "@mui/material";
-import './addVoter.css';
+import {
+  Alert,
+  Button,
+  FormControl,
+  FormControlLabel,
+  FormLabel,
+  Grid2,
+  InputLabel,
+  MenuItem,
+  Radio,
+  RadioGroup,
+  Select,
+  TextField,
+  Typography,
+} from "@mui/material";
+import "./addVoter.css";
 
 const AddVoter = () => {
   const [name, setName] = useState("");
@@ -44,13 +58,13 @@ const AddVoter = () => {
         is_candidate,
         address,
         phone,
-        gender
-      }; 
+        gender,
+      };
       const data = await voteAPI.createVoter(voterData);
       if (data.error) {
         setError(data.error);
         return;
-    }
+      }
       setConfirm("Votante creado con éxito");
       cleanStates();
     } catch (err) {
@@ -68,25 +82,33 @@ const AddVoter = () => {
     setPhone("");
     setGender("M");
   };
-  
+
   return (
-    <Grid2 className='container'>
+    <Grid2 className="container">
       <h2 className="title">Añadir un nuevo votante</h2>
-      {error && <Alert severity="error" sx={{marginBottom:'10px', width:'60%' }}>{error}</Alert>}
-      {confirm && <Alert severity="success" sx={{marginBottom:'10px', width:'60%'}}>{confirm}</Alert>}
+      {error && (
+        <Alert severity="error" sx={{ marginBottom: "10px", width: { xs:"80%", md: "60%" }}}>
+          {error}
+        </Alert>
+      )}
+      {confirm && (
+        <Alert severity="success" sx={{ marginBottom: "10px", width: { xs:"80%", md: "60%" } }}>
+          {confirm}
+        </Alert>
+      )}
       <form onSubmit={handleCreate} className="form">
-          <TextField
-            type="text"
-            variant='outlined'
-            className="input"
-            value={name}
+        <TextField
+          type="text"
+          variant="outlined"
+          className="input"
+          value={name}
           onChange={(e) => setName(e.target.value)}
           placeholder="Nombre"
-            required
-            slotProps={{
-              input: {style:{ color: 'whitesmoke'}}
-            }}
-          />
+          required
+          slotProps={{
+            input: { style: { color: "whitesmoke" } },
+          }}
+        />
         <TextField
           type="text"
           variant="outlined"
@@ -96,7 +118,7 @@ const AddVoter = () => {
           placeholder="Apellido"
           required
           slotProps={{
-            input: { style: { color: 'whitesmoke' } }
+            input: { style: { color: "whitesmoke" } },
           }}
         />
         <TextField
@@ -108,7 +130,7 @@ const AddVoter = () => {
           placeholder="Documento"
           required
           slotProps={{
-            input: { style: { color: 'whitesmoke' } }
+            input: { style: { color: "whitesmoke" } },
           }}
         />
         <TextField
@@ -120,7 +142,7 @@ const AddVoter = () => {
           required
           placeholder="Fecha de Nacimiento: dd/mm/aaaa"
           slotProps={{
-            input: { style: { color: 'whitesmoke' } }
+            input: { style: { color: "whitesmoke" } },
           }}
         />
         <TextField
@@ -132,7 +154,7 @@ const AddVoter = () => {
           placeholder="Dirección"
           required
           slotProps={{
-            input: { style: { color: 'whitesmoke' } }
+            input: { style: { color: "whitesmoke" } },
           }}
         />
         <TextField
@@ -144,59 +166,56 @@ const AddVoter = () => {
           placeholder="Teléfono"
           required
           slotProps={{
-            input: { style: { color: 'whitesmoke' } }
+            input: { style: { color: "whitesmoke" } },
           }}
         />
-        <div className='div-radios' >
-        <InputLabel className='label'>Género:</InputLabel>
-        <RadioGroup
-          value={gender}
-          onChange={(e) => setGender(e.target.value)}
-          row
-         sx={{width:'100%'}}
-        >
-          <FormControlLabel
-            value={"M"}
-            control={<Radio />}
-            label="Masculino"
-          />
-          <FormControlLabel
-            value={"F"}
-            control={<Radio />}
-            label="Femenino"
-          />
-           <FormControlLabel
-            value={"O"}
-            control={<Radio />}
-            label="Otro"
-          />
+        <div className="div-radios">
+          <InputLabel className="label">Género:</InputLabel>
+          <RadioGroup
+            value={gender}
+            onChange={(e) => setGender(e.target.value)}
+            row
+            sx={{ width: { xs: "120%", md: "100%" } }}
+          >
+            <FormControlLabel
+              value={"M"}
+              control={<Radio />}
+              label="Masculino"
+            />
+            <FormControlLabel
+              value={"F"}
+              control={<Radio />}
+              label="Femenino"
+            />
+            <FormControlLabel value={"O"} control={<Radio />} label="Otro" />
           </RadioGroup>
-          </div>
-        <div className='div-radios'>
-        <InputLabel className='iscandidate'>¿Es Candidato?</InputLabel>
-        <RadioGroup
-          value={is_candidate}
-          onChange={(e) => setIsCandidate(Number(e.target.value))}
-          row
-         sx={{width:'60%'}}
-        >
-          <FormControlLabel
-            value={0}
-            control={<Radio />}
-            label="No"
-            style={{ color: 'whitesmoke' }}
-          />
-          <FormControlLabel
-            value={1}
-            control={<Radio />}
-            label="Sí"
-            style={{ color: 'whitesmoke' }}
-          />
+        </div>
+        <div className="div-radios">
+          <InputLabel className="iscandidate">¿Es Candidato?</InputLabel>
+          <RadioGroup
+            value={is_candidate}
+            onChange={(e) => setIsCandidate(Number(e.target.value))}
+            row
+            sx={{ width: "60%" }}
+          >
+            <FormControlLabel
+              value={0}
+              control={<Radio />}
+              label="No"
+              style={{ color: "whitesmoke" }}
+            />
+            <FormControlLabel
+              value={1}
+              control={<Radio />}
+              label="Sí"
+              style={{ color: "whitesmoke" }}
+            />
           </RadioGroup>
-          </div>
-        <Button type="submit" className="button">Añadir votante</Button>
+        </div>
+        <Button type="submit" className="button">
+          Añadir votante
+        </Button>
       </form>
-     
     </Grid2>
   );
 };

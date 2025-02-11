@@ -1,4 +1,4 @@
-.votes-container{
+.mostVoted-container{
     width: 40%;
     height: 80%;
     display: flex;
@@ -120,5 +120,19 @@ gap:20px;
 .MuiCheckbox-colorPrimary.Mui-checked{
     color:#7000c6;
 }
+}
+
+@media screen and (max-width: 480px) {
+  .mostVoted-container{
+    width: 90%;
+    .list{
+      width:100%;
+      .MuiListItemText-primary{
+        font-size: 14px;
+      }
+    }
+   
+  }
+  
 }
 

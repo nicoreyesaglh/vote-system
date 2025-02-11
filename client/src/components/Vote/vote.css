@@ -107,56 +107,68 @@
         font-size: 20px;
       }
       
-.list{
-  width:80%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  margin:20 auto;
-  gap:10px;
-  padding:5px 30px;
-  .list-item{
-      border:1px solid #3d3d3d;
-      border-radius: 8px;
-      padding: 10px;
-      margin:5px;
-      
-      color:whitesmoke;
-      padding-left:20px;
-  }
-  .list-item:hover{
-      background-color: #303030;
-      color: whitesmoke;
-      cursor: pointer;
-  }
-  .check{
-      color:#7000c6;
-  }
-  .avatar{
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      margin: 5px;
-  }
-  
-  .MuiListItemText-primary{
-      
-      color:whitesmoke;
-      text-align: left;
-      width:100%;
-      font-size: 16px;
-      .candidate-vote{
+  .list{
+    width:80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    margin:20 auto;
+    gap:10px;
+    padding:5px 30px;
+    .list-item{
+        border:1px solid #3d3d3d;
+        border-radius: 8px;
+        padding: 10px;
+        margin:5px;
         
         color:whitesmoke;
-      font-size: 14px;
-      padding-left: 20px;
-      }
-  }
+        padding-left:20px;
+    }
+    .list-item:hover{
+        background-color: #303030;
+        color: whitesmoke;
+        cursor: pointer;
+    }
+    .check{
+        color:#7000c6;
+    }
+    .avatar{
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        margin: 5px;
+    }
+    
+    .MuiListItemText-primary{
+        
+        color:whitesmoke;
+        text-align: left;
+        width:100%;
+        font-size: 16px;
+        .candidate-vote{
+          
+          color:whitesmoke;
+        font-size: 14px;
+        padding-left: 20px;
+        }
+    }
+    
+    .MuiCheckbox-colorPrimary.Mui-checked{
+        color:#7000c6;
+    }
+    }
+
+   
   
-  .MuiCheckbox-colorPrimary.Mui-checked{
-      color:#7000c6;
-  }
+}
+
+@media screen and (max-width: 480px) {
+  .vote-container{
+    width: 90%;
+    .list{
+      width:100%;
+    }
   }
   
 }

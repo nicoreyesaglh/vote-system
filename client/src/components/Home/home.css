@@ -59,3 +59,13 @@
 
 
 }
+
+@media screen and (max-width: 480px) {
+  .home-container{
+    .title{
+     margin-top: 30%;
+    }
+   
+  }
+  
+}

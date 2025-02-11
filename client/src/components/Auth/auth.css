@@ -164,3 +164,20 @@
   align-items: center;
   height: 20%;
 }
+
+@media screen and (max-width: 480px) {
+  .login-container{
+    width: 90%;
+    .form{
+      width: 100%;
+    }
+  }
+  
+  .pass-container{
+    width: 90%;
+    .form{
+      width: 100%;
+    }
+  }
+  
+}

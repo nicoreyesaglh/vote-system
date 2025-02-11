@@ -16,7 +16,6 @@ const ChangePassword = () => {
     const [error, setError] = useState("");
     const [confirm, setConfirm] = useState("");
   const { user } = useContext(AuthContext);
-  const navigate = useNavigate();
 
     const togglePasswordVisibility = (v) => {
         v === 1 ?
@@ -32,24 +31,45 @@ const ChangePassword = () => {
       setError("");
       setConfirm("");
 
+      if (newPassword !== newPasswordConfirm) {
+          setError("Las contraseñas nuevas no coinciden");
+          return;
+      }
+
+      if (password === newPassword) {
+        setError("La contraseña nueva no puede ser igual a la actual");
+        return;
+    }
 
     try {
         const data = await authAPI.modifyPassword(user.email, password, newPassword);
-        setConfirm("Se ha cambiado con exito la contraseña.")
-        navigate("/"); 
+        if (data.error) {
+            setError(data.error);
+            return;
+        }
+        setConfirm(data.message)
+        cleanStates();
+        
     } catch (err) {
-        setError("Error al cambiar la contraseña");
+        setError(err.error);
     }
 };
+    
+    const cleanStates = () => {
+        setPassword("");
+        setNewPassword("");
+        setNewPasswordConfirm("");
+    }
+
   return (
     <Grid2 className='pass-container'>
       <Typography variant="h1" className="title">Cambio de contraseña</Typography>
-      <Typography variant="body1" className="subtitle">Para cambiar de contraseña ingresa primero tu contraseña actual. Luego ingresa la nueva contraseña en los 2 campos de debajo</Typography>
+      <Typography variant="body1" className="subtitle">Para cambiar de contraseña ingresa primero tu contraseña actual. Luego ingresa la nueva contraseña en los dos campos siguientes.</Typography>
       <form onSubmit={handleChangePass} className="form">
           
           <InputLabel className='label'>Contraseña actual:</InputLabel>
           <TextField
-             type={showPassword ? "text" : "password"}
+            type={showPassword ? "text" : "password"}
             variant='outlined'
             className="input"
             value={password}

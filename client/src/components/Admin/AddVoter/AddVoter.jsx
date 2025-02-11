@@ -30,7 +30,6 @@ const AddVoter = () => {
     if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
       age--;
     }
-    console.log(age)
     if (age < 18) {
       setError("Debes tener al menos 18 años.");
       return;
@@ -48,6 +47,10 @@ const AddVoter = () => {
         gender
       }; 
       const data = await voteAPI.createVoter(voterData);
+      if (data.error) {
+        setError(data.error);
+        return;
+    }
       setConfirm("Votante creado con éxito");
       cleanStates();
     } catch (err) {

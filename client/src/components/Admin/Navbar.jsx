@@ -43,7 +43,7 @@ function Navbar({ pages, settings }) {
             component="a"
             sx={{ display: { xs: 'none', md: 'flex' }, fontWeight:'bold', textDecoration:'none'}}
           >
-            Gestión de Votación
+            Sistema de Votación
           </Typography>
 
           <Box sx={{ display: { xs: 'flex', md: 'none' }, width:'20px' }}>
@@ -88,9 +88,9 @@ function Navbar({ pages, settings }) {
             href='/'
             sx={{ display: { xs: 'flex', md: 'none' }, fontWeight:'bold', textDecoration:'none' }}
           >
-            Gestión de Votación
+            Sistema de Votación
           </Typography>
-          <Box sx={{ width:'60%', height:'60px', display: { xs: 'none', md: 'flex' }, gap: '20px'}}>
+          <Box sx={{ width:'70%', height:'60px', display: { xs: 'none', md: 'flex' }, gap: '20px', justifyContent:'flex-start', paddingLeft:'60px'}}>
             {pages.map((page) => (
               <Button
                 key={page.label}
@@ -99,7 +99,7 @@ function Navbar({ pages, settings }) {
                   color: 'white',
                   display: 'block',
                   fontWeight: 'bold',
-                  width: '30%',
+                  width: '20%',
                   borderRadius:'0px',
                   borderBottom: location.pathname === page.url ? '2px solid white' : 'none'
                 }}

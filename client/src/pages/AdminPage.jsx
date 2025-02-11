@@ -1,4 +1,3 @@
-import { AppBar, useMediaQuery, useTheme } from '@mui/material';
 import React from 'react';
 import Navbar from '../components/Admin/Navbar';
 import { Route, Routes } from 'react-router-dom';
@@ -8,10 +7,6 @@ import AddVoter from '../components/Admin/AddVoter/AddVoter';
 import ChangePassword from '../components/Auth/ChangePassword';
 
 const AdminPage = () => {
-  const theme = useTheme();
-  const isMd = useMediaQuery(theme.breakpoints.up("md"), {
-    defaultMatches: true,
-  });
 
   const pages = [
     { label: 'Candidatos más votados', url: '/admin/most-voted' },

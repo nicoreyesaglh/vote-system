@@ -1,4 +1,5 @@
 const API_URL = import.meta.env.VITE_API_BASE_ENDPOINT;
+const token = localStorage.getItem("token");
 
 const login = async (email, password) => {
     try {
@@ -10,9 +11,6 @@ const login = async (email, password) => {
             body: JSON.stringify({ email, password }),
         });
 
-        if (!response.ok) {
-            throw new Error("Error en el login. Verifica tus credenciales.");
-        }
 
         const data = await response.json();
         return data;
@@ -28,13 +26,10 @@ const modifyPassword = async (email, oldPassword, newPassword) => {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`,
             },
             body: JSON.stringify({ email, oldPassword, newPassword }),
         });
-
-        if (!response.ok) {
-            throw new Error("Error al cambiar de contraseña. Verifica las contraseñas.");
-        }
 
         const data = await response.json();
         return data;

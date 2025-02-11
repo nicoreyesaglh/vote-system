@@ -18,8 +18,8 @@ Asegúrate de tener las siguientes herramientas instaladas en tu sistema:
 ### Clonación del proyecto desde GitHub
 Clona el repositorio en tu máquina local:
 
-`git clone https://github.com/tu-usuario/nombre-del-repositorio.git`
-`cd nombre-del-repositorio`
+`git clone https://github.com/nicoreyesaglh/vote-system.git`
+`cd vote-system`
 
 ### Configuración del entorno
 - Archivo .env en la carpeta server

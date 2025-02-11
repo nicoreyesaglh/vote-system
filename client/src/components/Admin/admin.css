@@ -1,0 +1,42 @@
+.MuiAppBar-root{
+    background-color: #4d0088 !important;
+    border-bottom: 1px solid #7000c6;
+    height: 60px;
+    padding: 0;
+    margin: 0;
+    .MuiButtonBase-root{
+        color: whitesmoke;
+        
+        font-size:12px;
+        text-transform: none;
+        height: 100% !important;
+    }
+    .MuiToolbar-root{
+        padding: 0;
+        margin: 0;
+        display: flex;
+        justify-content: space-between;
+
+    }
+
+}
+.MuiMenu-root{
+    background-color: #282c34;
+    color:whitesmoke;
+    .MuiList-root{
+        padding: 0;
+    }
+    .MuiMenuItem-root{
+    
+    font-size: 12px;
+    background-color: #282c34;
+    color:whitesmoke;
+    text-transform: none;
+    &:hover{
+        background-color: #4d0088;
+    }
+    }
+
+}
+
+

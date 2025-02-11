@@ -9,14 +9,14 @@ import theme from "./utils/theme.js";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <AuthProvider>
-      <VoteProvider>
-        <ThemeProvider theme={theme}>
-          <BrowserRouter>
+    <BrowserRouter>
+      <AuthProvider>
+        <VoteProvider>
+          <ThemeProvider theme={theme}>
             <App />
-          </BrowserRouter>
-        </ThemeProvider>
-      </VoteProvider>
-    </AuthProvider>
+          </ThemeProvider>
+        </VoteProvider>
+      </AuthProvider>
+    </BrowserRouter>
   </React.StrictMode>
 );

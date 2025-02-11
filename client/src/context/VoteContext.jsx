@@ -1,51 +1,53 @@
-import React, { createContext, useState, useEffect } from "react";
+import React, { createContext, useState, useEffect, useContext } from "react";
 import voteAPI from "../api/voteAPI";
+import { useLocation } from "react-router-dom";
+import { AuthContext } from "./AuthContext";
 
 export const VoteContext = createContext();
 
 export const VoteProvider = ({ children }) => {
+  const { user } = useContext(AuthContext);
   const [candidates, setCandidates] = useState([]);
   const [votes, setVotes] = useState([]);
   const [topCandidates, setTopCandidates] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const location = useLocation();
 
-  // cargar candidatos
   useEffect(() => {
-    const fetchCandidates = async () => {
-      setLoading(true);
-      try {
-        const data = await voteAPI.getCandidates();
-        setCandidates(data);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
+    // cargar candidatos
     fetchCandidates();
-  }, []);
+    if (user) {
+      //candidatos más votados
+      fetchTopCandidates();
+      //cargar votos
+      fetchVotes();
+    }
+  }, [location]);
 
-  //candidatos más votados
-  useEffect(() => {
-    const fetchTopCandidates = async () => {
-      setLoading(true);
-      try {
-        const data = await voteAPI.getTopVotedCandidates();
-        setTopCandidates(data);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchTopCandidates();
-  }, []);
+  const fetchTopCandidates = async () => {
+    setLoading(true);
+    try {
+      const data = await voteAPI.getTopVotedCandidates();
+      setTopCandidates(data);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-  //cargar votos
-  useEffect(() => {
-    fetchVotes();
-  }, []);
+  const fetchCandidates = async () => {
+    setLoading(true);
+    try {
+      const data = await voteAPI.getCandidates();
+      setCandidates(data);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const fetchVotes = async (page = 1, limit = 5) => {
     setLoading(true);
@@ -61,7 +63,15 @@ export const VoteProvider = ({ children }) => {
 
   return (
     <VoteContext.Provider
-      value={{ candidates, votes, fetchVotes, topCandidates, loading, error }}
+      value={{
+        candidates,
+        votes,
+        fetchVotes,
+        fetchTopCandidates,
+        topCandidates,
+        loading,
+        error,
+      }}
     >
       {children}
     </VoteContext.Provider>

@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import {Alert, Button, Grid2, InputLabel, TextField, Typography} from '@mui/material';
-import './votes.css';
+import './vote.css';
 import CandidatesList from './CandidatesList';
 import { VoteContext } from '../../context/VoteContext';
 import voteAPI from '../../api/voteAPI';

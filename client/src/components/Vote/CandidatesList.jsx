@@ -4,7 +4,7 @@ import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Checkbox from '@mui/material/Checkbox';
 import Avatar from '@mui/material/Avatar';
-import './votes.css';
+import './vote.css';
 
 const CandidatesList = ({candidates, setSelectedCandidate, checked, setChecked}) => {
 

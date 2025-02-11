@@ -63,6 +63,7 @@
       }
     
       .title{
+        
         color:whitesmoke;
         text-align: center;
         width:100%;
@@ -70,48 +71,6 @@
         font-size: 40px;
         font-weight: bold;
       }
-
-      .subtitle{
-        color:whitesmoke;
-        text-align: center;
-        width:100%;
-        margin-bottom: 10px;
-        font-size: 24px;
-        font-weight: bold;
-      }
-
-      .subtitle-two{
-        color:whitesmoke;
-        text-align: center;
-        width:100%;
-        margin-bottom: 30px;
-        font-size: 18px;
-      }
-
-      .MuiPaginationItem-icon{
-        color:whitesmoke !important;
-      }
-
-        .modal-title{
-          color:whitesmoke;
-          text-align: center;
-          width:100%;
-          margin-bottom: 30px;
-          font-size: 30px;
-          font-weight: bold;
-        }
-        .modal-subtitle{
-          color:whitesmoke;
-          text-align: center;
-          width:100%;
-          margin-bottom: 10px;
-          font-size: 16px;
-        }
-        .modal{
-          color:whitesmoke;
-          text-align: center;
-    
-        }
     
       .MuiInputBase-input {
         font-family: 'Poppins' !important;
@@ -130,7 +89,7 @@ gap:20px;
 .list-item{
     border:1px solid #3d3d3d;
     border-radius: 8px;
-    padding: 10px;
+    padding: 10px 30px;
     margin:5px;
     
     color:whitesmoke;
@@ -138,7 +97,6 @@ gap:20px;
 .list-item:hover{
     background-color: #303030;
     color: whitesmoke;
-    cursor: pointer;
 }
 .check{
     color:#7000c6;
@@ -159,6 +117,8 @@ gap:20px;
     padding-left: 20px;
 }
 
-
+.MuiCheckbox-colorPrimary.Mui-checked{
+    color:#7000c6;
+}
 }
 

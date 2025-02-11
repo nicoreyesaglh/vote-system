@@ -3,6 +3,9 @@ import React from 'react';
 import Navbar from '../components/Admin/Navbar';
 import { Route, Routes } from 'react-router-dom';
 import Votes from '../components/Admin/Votes/Votes';
+import MostVoted from '../components/Admin/MostVoted/MostVoted';
+import AddVoter from '../components/Admin/AddVoter/AddVoter';
+import ChangePassword from '../components/Auth/ChangePassword';
 
 const AdminPage = () => {
   const theme = useTheme();
@@ -28,10 +31,11 @@ const AdminPage = () => {
       <Routes>
           <Route index element={<Votes />} />
           <Route path="votes" element={<Votes />} />
-          {/* <Route path="most-voted" element={<TopVotedCandidates />} />
-          <Route path="vote-detail" element={<VoteDetail />} />
-          <Route path="create-voter" element={<CreateVoter />} />
-          <Route path="modify-password" element={<ModifyPassword />} /> */}
+           <Route path="most-voted" element={<MostVoted />} />
+           <Route path="create-voter" element={<AddVoter />} />
+           <Route path="modify-password" element={<ChangePassword />} /> 
+         {/* <Route path="vote-detail" element={<VoteDetail />} />
+          */}
       </Routes>
       
     </div>

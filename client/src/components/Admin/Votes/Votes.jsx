@@ -25,7 +25,7 @@ const Votes = () => {
   const [loading, setLoading] = useState(false);
   const [voteInfo, setVoteInfo] = useState(null);
   const [openVoteInfo, setOpenVoteInfo] = useState(false);
-  let limit = 10;
+  let limit = 5;
   
   const getTopVotedCandidate = (topCandidates) => {
     if (!topCandidates || topCandidates.length === 0) {
@@ -64,7 +64,8 @@ const Votes = () => {
   return (
     <Grid2 className='votes-container'>
       <Typography variant='h1' className='title'>Todos los votos</Typography>
-      {topCandidates && topCandidates.length > 0 && <Typography variant='h1' className='subtitle'>{getTopVotedCandidate(topCandidates)}</Typography>}
+      {topCandidates && topCandidates.length > 0 && <Typography variant='h6' className='subtitle'>{getTopVotedCandidate(topCandidates)}</Typography>}
+      {votes && votes.totalVotes && <Typography variant='h6' className='subtitle-two'>{`${votes.totalVotes} ${votes.totalVotes > 1 ? 'votos registrados' : 'voto registrado'}`}</Typography>}
         <List className='list'>
             {votes?.data?.map((v) => {
               const labelId = `${v.id}`;
@@ -82,12 +83,12 @@ const Votes = () => {
                            
                     />
                      <Typography
-                                  component="span"
-                                  variant="body2"
-                                  sx={{padingLeft:'20px', color:'whitesmoke', fontFamily:'Poppins !important'}}
-                                >
-                                  { formattedDate}
-                                </Typography>
+                          component="span"
+                          variant="body2"
+                          sx={{padingLeft:'20px', color:'whitesmoke', fontFamily:'Poppins !important'}}
+                        >
+                          { formattedDate}
+                        </Typography>
                     </ListItem>
                 );
             })}
@@ -101,17 +102,17 @@ const Votes = () => {
           className='modal'
           >
         <Box sx={modalStyle}>
-          <Typography variant='h4'>Datos del voto</Typography>
+          <h2 className='modal-title'>Datos del voto</h2>
           <Divider color='#fff'/>
           {voteInfo && (
             <div style={{marginTop:'20px'}}>
-            <Typography variant='h6' className='modal-subtitle'>{voteInfo.name} {voteInfo.lastName} votó por {voteInfo.candidate}</Typography>
-            <Typography variant='body1' className='modal-body'>Fecha del voto: {new Date(voteInfo.date).toLocaleDateString()}</Typography>
-            <Typography variant='body1' className='modal-body'>Documento: {voteInfo.document}</Typography>
-            <Typography variant='body1' className='modal-body'>Fecha de Nacimiento: {new Date(voteInfo.dob).toLocaleDateString()}</Typography>
-              {voteInfo.gender?.length > 0 && <Typography variant='body1' className='modal-body'>Género: {voteInfo.gender}</Typography>}
-              {voteInfo.address?.length > 0 && <Typography variant='body1' className='modal-body'>Dirección: {voteInfo.address}</Typography>}
-              {voteInfo.phone?.length > 0 && <Typography variant='body1' className='modal-body'>Teléfono: {voteInfo.phone}</Typography>}
+            <h3 className='modal-subtitle'>{voteInfo.name} {voteInfo.lastName} votó por {voteInfo.candidate}</h3>
+            <p variant='body1' className='modal-body'>Fecha del voto: {new Date(voteInfo.date).toLocaleDateString()}</p>
+            <p variant='body1' className='modal-body'>Documento: {voteInfo.document}</p>
+            <p variant='body1' className='modal-body'>Fecha de Nacimiento: {new Date(voteInfo.dob).toLocaleDateString()}</p>
+              {voteInfo.gender?.length > 0 && <p variant='body1' className='modal-body'>Género: {voteInfo.gender}</p>}
+              {voteInfo.address?.length > 0 && <p variant='body1' className='modal-body'>Dirección: {voteInfo.address}</p>}
+              {voteInfo.phone?.length > 0 && <p variant='body1' className='modal-body'>Teléfono: {voteInfo.phone}</p>}
             </div>
         )}
       </Box>

@@ -47,7 +47,7 @@ export const VoteProvider = ({ children }) => {
     fetchVotes();
   }, []);
 
-  const fetchVotes = async (page = 1, limit = 10) => {
+  const fetchVotes = async (page = 1, limit = 5) => {
     setLoading(true);
     try {
       const data = await voteAPI.getVotes(page, limit);

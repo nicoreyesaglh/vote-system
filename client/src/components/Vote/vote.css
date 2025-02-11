@@ -1,14 +1,13 @@
-.votes-container{
+.vote-container{
   position:relative;
-    width: 50%;
-    height: 80%;
+    width: 40%;
+    height:fit-content;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
     margin:auto;
     .label {
-        font-family: Poppins;
         color:whitesmoke;
         text-align: left;
         width:100%;
@@ -64,7 +63,7 @@
       }
     
       .title{
-        font-family: Poppins !important;
+        
         color:whitesmoke;
         text-align: center;
         width:100%;
@@ -73,15 +72,16 @@
         font-weight: bold;
       }
 
-      .MuiTypography-root{
-        font-family: Poppins !important;
+     .MuiPaginationItem-icon{
+        color:whitesmoke !important;
       }
+
         .modal-title{
           color:whitesmoke;
           text-align: center;
           width:100%;
           margin-bottom: 30px;
-          font-size: 20px;
+          font-size: 30px;
           font-weight: bold;
         }
         .modal-subtitle{
@@ -94,23 +94,17 @@
         .modal{
           color:whitesmoke;
           text-align: center;
-         
-          .MuiTypography-root{
-            font-family: Poppins !important;
-          }
+    
         }
         
        
       .subtitle{
-        font-family: Poppins !important;
+        
         color:whitesmoke;
         text-align: center;
         width:100%;
         margin-bottom: 30px;
         font-size: 20px;
-      }
-      .MuiInputBase-input {
-        font-family: 'Poppins' !important;
       }
       
 .list{
@@ -127,7 +121,7 @@
       border-radius: 8px;
       padding: 10px;
       margin:5px;
-      font-family: Poppins !important;
+      
       color:whitesmoke;
       padding-left:20px;
   }
@@ -147,13 +141,13 @@
   }
   
   .MuiListItemText-primary{
-      font-family: Poppins !important;
+      
       color:whitesmoke;
       text-align: left;
       width:100%;
       font-size: 16px;
       .candidate-vote{
-        font-family: Poppins !important;
+        
         color:whitesmoke;
       font-size: 14px;
       padding-left: 20px;

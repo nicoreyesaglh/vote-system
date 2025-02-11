@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react';
 import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Avatar, Button, Tooltip, MenuItem } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import './admin.css';
 
@@ -10,6 +10,7 @@ function Navbar({ pages, settings }) {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -38,8 +39,9 @@ function Navbar({ pages, settings }) {
           <Typography
             variant="h6"
             noWrap
+            href='/'
             component="a"
-            sx={{ display: { xs: 'none', md: 'flex' } }}
+            sx={{ display: { xs: 'none', md: 'flex' }, fontWeight:'bold', textDecoration:'none'}}
           >
             Gestión de Votación
           </Typography>
@@ -49,7 +51,7 @@ function Navbar({ pages, settings }) {
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
             color="inherit"
-            sx={{ display: { xs: 'flex', md: 'none' }, width:'20px' }}
+            sx={{ display: { xs: 'flex', md: 'none' }, width:'100%' }}
             >
               <MenuIcon />
             </IconButton>
@@ -69,7 +71,7 @@ function Navbar({ pages, settings }) {
                 onClose={handleCloseNavMenu}
                 className='mobile-menu'
                 sx={{
-                display: { xs: 'block', md: 'none' }, backgroundColor:'transparent',
+                display: { xs: 'flex', md: 'none' }, backgroundColor:'transparent',
                 }}
             >
               {pages.map((page) => (
@@ -83,16 +85,24 @@ function Navbar({ pages, settings }) {
             variant="h6"
             noWrap
             component="a"
-            sx={{ display: { xs: 'flex', md: 'none' } }}
+            href='/'
+            sx={{ display: { xs: 'flex', md: 'none' }, fontWeight:'bold', textDecoration:'none' }}
           >
             Gestión de Votación
           </Typography>
-          <Box sx={{ width:'60%', display: { xs: 'none', md: 'flex' }, gap: '20px'}}>
+          <Box sx={{ width:'60%', height:'60px', display: { xs: 'none', md: 'flex' }, gap: '20px'}}>
             {pages.map((page) => (
               <Button
                 key={page.label}
                 onClick={() => navigate(page.url)}
-                sx={{ color: 'white', display: 'block' }}
+                style={{
+                  color: 'white',
+                  display: 'block',
+                  fontWeight: 'bold',
+                  width: '30%',
+                  borderRadius:'0px',
+                  borderBottom: location.pathname === page.url ? '2px solid white' : 'none'
+                }}
               >
                 {page.label}
               </Button>

@@ -4,18 +4,12 @@
     height: 60px;
     padding: 0;
     margin: 0;
-    .MuiTypography-root{
-    color: whitesmoke;
-    font-family: Poppins !important;
-    font-weight: bold;
-    }
     .MuiButtonBase-root{
         color: whitesmoke;
-        font-family: Poppins !important;
+        
         font-size:12px;
         text-transform: none;
-        height: 100%;
-        width:20%;
+        height: 100% !important;
     }
     .MuiToolbar-root{
         padding: 0;
@@ -33,7 +27,7 @@
         padding: 0;
     }
     .MuiMenuItem-root{
-    font-family: Poppins !important;
+    
     font-size: 12px;
     background-color: #282c34;
     color:whitesmoke;
@@ -42,10 +36,7 @@
         background-color: #4d0088;
     }
     }
-    .MuiTypography-root{
-        color:whitesmoke;
-        font-family: Poppins !important;
-    }
+
 }
 
 

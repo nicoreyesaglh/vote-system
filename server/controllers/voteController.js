@@ -123,7 +123,7 @@ const getCandidates = async (req, res) => {
 const getVotes = async (req, res) => {
   try {
     //opciones de paginado obtenidas del query
-    const { page = 1, limit = 10 } = req.query;
+    const { page = 1, limit = 5 } = req.query;
     const offset = (page - 1) * limit;
 
     //consultar los votos y obtener datos del votante y candidato
